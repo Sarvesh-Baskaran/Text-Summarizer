@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Summarizer</title>
+    <script src="./input.js" defer></script>
+</head>
+
+
+<body class="body" background="./assets/background.jpg" style = "font-family: 'Times New Roman', Times, serif; font-size: 120%; color: rgb(231, 243, 182);  background-size:cover;">
+    <p class="heading" style="font-size:400%; color:rgb(192, 192, 192); font-family:Impact; text-align: center; margin-top: 100px; margin-bottom: 30px;">TEXT SUMMARIZER</p>
+    <div class="content" style="align-content: center; margin-left: 29%; vertical-align: top; font-family: Georgia;">
+        <article>
+            <h3>Enter Text to Summarize...</h3>
+            <label> </label>
+            <textarea type="text" id="txt" rows="10" cols="90" placeholder="Enter content to Summarize"></textarea>
+            <br><br><button type="submit" id="submit">Submit</button>
+        </article>
+        <article>
+            <h3>Generated Summary...</h3>
+            <div class="outputbox" style="background-color: blanchedalmond; height: 190px; width: 685px; margin-right: 300px; display: flex;">
+                <p id="output" style="color: black; text-indent: 2px;"></p>
+            </div>
+        </article>
+    </div>
+</body>
+</html>
