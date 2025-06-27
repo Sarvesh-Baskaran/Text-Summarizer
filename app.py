@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 #from transformers import BartForConditionalGeneration, BartTokenizer
 import requests
-import torch
+#import torch
 from flask_cors import CORS
 
 app = Flask(__name__)
