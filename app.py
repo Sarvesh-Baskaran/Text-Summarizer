@@ -6,15 +6,11 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)  # enables CORS for frontend to access API
 
-# Load model and tokenizer (you can cache this to avoid reloading every time)
+#load model and tokenizer (you can cache this to avoid reloading every time)
 api_token = os.getenv("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")
 #endpoint for model
 API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
 headers = {"Authorization": f"Bearer {api_token}"}
-
-#model_name = "sshleifer/distilbart-cnn-12-6"
-#tokenizer = BartTokenizer.from_pretrained(model_name)
-#model = BartForConditionalGeneration.from_pretrained(model_name)
 
 @app.route('/summarize', methods=['POST'])
 def summarize():
@@ -24,6 +20,7 @@ def summarize():
     if not text:
         return jsonify({"error": "No text provided"}), 400
 
+    #getting response from api_token in huggingface
     response = requests.post(API_URL, headers=headers, json={"inputs": text})
 
     if response.status_code != 200:
