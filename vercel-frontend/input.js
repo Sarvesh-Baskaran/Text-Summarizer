@@ -1,5 +1,5 @@
 async function summarizeArticle(article) {
-    const response = await fetch("http://change0name.onrender.com/summarize", {
+    const response = await fetch("https://text-summarizer-1-dla7.onrender.com/summarize", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
