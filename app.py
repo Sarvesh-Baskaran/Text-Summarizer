@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
-from transformers import BartForConditionalGeneration, BartTokenizer
+#from transformers import BartForConditionalGeneration, BartTokenizer
+import requests
 import torch
 from flask_cors import CORS
 
@@ -7,9 +8,14 @@ app = Flask(__name__)
 CORS(app)  # enables CORS for frontend to access API
 
 # Load model and tokenizer (you can cache this to avoid reloading every time)
-model_name = "sshleifer/distilbart-cnn-12-6"
-tokenizer = BartTokenizer.from_pretrained(model_name)
-model = BartForConditionalGeneration.from_pretrained(model_name)
+api_token = os.getenv("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")
+#endpoint for model
+API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
+headers = {"Authorization": f"Bearer {api_token}"}
+
+#model_name = "sshleifer/distilbart-cnn-12-6"
+#tokenizer = BartTokenizer.from_pretrained(model_name)
+#model = BartForConditionalGeneration.from_pretrained(model_name)
 
 @app.route('/summarize', methods=['POST'])
 def summarize():
@@ -19,9 +25,19 @@ def summarize():
     if not text:
         return jsonify({"error": "No text provided"}), 400
 
-    # Tokenize and summarize
-    inputs = tokenizer.encode("summarize: " + text, return_tensors="pt", max_length=1024, truncation=True)
-    summary_ids = model.generate(inputs, max_length=150, min_length=40, length_penalty=2.0, num_beams=4, early_stopping=True)
-    summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+    response = requests.post(API_URL, headers=headers, json={"inputs": text})
 
-    return jsonify({"summary": summary})
+    if response.status_code != 200:
+        return jsonify({
+            "error": "Failed to summarize",
+            "details": response.text
+        }), 500
+
+    try:
+        summary_text = response.json()[0]['summary_text']
+        return jsonify({"summary": summary_text})
+    except Exception as e:
+        return jsonify({
+            "error": "Unexpected response format",
+            "details": str(e)
+        }), 500
