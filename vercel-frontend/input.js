@@ -1,5 +1,5 @@
 async function summarizeArticle(article) {
-    const response = await fetch("https://text-summarizer.railway.internal/summarize", {
+    const response = await fetch("https://text-summarizer-04.up.railway.app/summarize", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
