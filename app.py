@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)  # enables CORS for frontend to access API
 
 #load model and tokenizer (you can cache this to avoid reloading every time)
-api_token = "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"
+api_token = os.getenv("HF_TOKEN") #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
 #endpoint for model
 API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
 headers = {"Authorization": f"Bearer {api_token}"}
