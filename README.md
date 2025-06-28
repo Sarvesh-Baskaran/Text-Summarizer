@@ -16,10 +16,27 @@ A basic Text Summarizer application tool that uses Hugging Face's Transformers (
 ## Project Structure
 
 Text_Summarizer/
-- app.py  #Main Flask app
-- wsgi.py  #WSGI entry point for deployment
-- home.html  #Frontend UI
-- input.js  #JavaScript for interacting with API
-- packages.txt #Dependencies
-- README.md  #Project overview (this file)
-- .gitignore #Files ignored in version control
+- vercel-frontend/
+   - assets/background.jgp #background image
+   - index.html            #frontend UI
+   - input.js              #javaScript for interacting with API
+- app.py                  #main Flask app
+- wsgi.py                 #WSGI entry point for deployment
+- requirements.txt        #Dependencies
+- README.md               #Project overview (this file)
+
+---
+
+## How it works
+
+The input text getting from frontend is taken to backend though Flask API, where the text goes through the pretrained BART model for summarization (which is available publically in HuggingFace.co) and the output, i.e., the generated summary is printed in the frontend.
+
+---
+
+## Deployment
+
+Frontend - Deployed through vercel.com
+  Root directory: vercel-frontend
+
+Backend - Built and deployed through Railway.com
+  Environment Variable "HF_TOKEN" added with value of an API Token generated from HuggingFace.co
