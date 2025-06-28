@@ -8,7 +8,7 @@ CORS(app)  # enables CORS for frontend to access API
 
 #load model and tokenizer (you can cache this to avoid reloading every time)
 #HF_TOKEN mentioned as a environment variable in railway.com
-api_token = os.getenv("HF_TOKEN") #HF_TOKEN = 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
+api_token = os.getenv("HF_TOKEN") #HF_TOKEN = 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
 #endpoint for model
 API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
 headers = {"Authorization": f"Bearer {api_token}"}
